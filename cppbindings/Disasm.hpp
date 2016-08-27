@@ -44,8 +44,8 @@ public:
 	__attribute__((always_inline))
 	unsigned int
 	Version(
-		out int* major = nullptr,
-		out int* minor = nullptr
+		int* major = nullptr,
+		int* minor = nullptr
 		)
 	{
 		return cs_version(major, minor);
@@ -74,7 +74,6 @@ public:
 		http://capstone-engine.org/lang_c.html
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetSyntax(
 		 cs_opt_value syntax
@@ -90,7 +89,6 @@ public:
 		cs_opt_value::CS_OPT_ON
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetDetail(
 		 cs_opt_value detailedInfo
@@ -116,7 +114,6 @@ public:
 		http://capstone-engine.org/lang_c.html
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetMode(
 		 cs_mode mode
@@ -137,7 +134,6 @@ public:
 		http://capstone-engine.org/embed.html
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetMemMgrFunc(
 		 cs_opt_mem& memMgrSetup
@@ -155,7 +151,6 @@ public:
 		http://capstone-engine.org/skipdata.html
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetSkipData(
 		 cs_opt_value skipData
@@ -175,7 +170,6 @@ public:
 		http://capstone-engine.org/skipdata.html
 	*/
 	__attribute__((always_inline))
-	__checkReturn
 	bool
 	SetSkipDataCallback(
 		 cs_opt_skipdata& dataCallbackSetup
