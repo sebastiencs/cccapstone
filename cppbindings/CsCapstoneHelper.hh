@@ -22,20 +22,20 @@ struct CS_INSN_HOLDER
 	const void* Address;
 	size_t Count;
 
-	__forceinline
+	__attribute__((always_inline))
 	CsInsClass_t
 	Instructions(
-		__in size_t i
-		) 
+		 size_t i
+		)
 	{
 		return *new CsInsClass_t(m_csh, m_csInstructions + i);
 	}
 
 	CS_INSN_HOLDER(
-		__in CS_HANDLE& csh,
-		__in const void* address,
-		__in size_t size,
-		__in size_t baseAddr
+		 CS_HANDLE& csh,
+		 const void* address,
+		 size_t size,
+		 size_t baseAddr
 		) : m_csh(csh),
 			Address(address),
 			Size(size),

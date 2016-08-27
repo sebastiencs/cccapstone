@@ -11,73 +11,73 @@ protected:
 
 public:
 	CCsDisasm(
-		__in cs_arch arch,
-		__in unsigned int mode
+		 cs_arch arch,
+		 unsigned int mode
 		)
 	{
 		m_err = cs_open(arch, static_cast<cs_mode>(mode), m_csh.get());
 	}
 
 	typedef CS_INSN_HOLDER<CsInsClass_t> ins_holder_t;
-	
+
 //////////////////////////////////////////////////////////////////////////
 // runtime opcode info
 //////////////////////////////////////////////////////////////////////////
-	__forceinline
+	__attribute__((always_inline))
 	ins_holder_t*
 	Disasm(
-		__in const void* code,
-		__in size_t size,
-		__in size_t baseAddr = 0
+		 const void* code,
+		 size_t size,
+		 size_t baseAddr = 0
 		)
 	{
 		return new ins_holder_t(m_csh, code, size, baseAddr);
 	}
 
-	__forceinline
+	__attribute__((always_inline))
 	cs_err
 	GetError()
 	{
 		return m_err;
 	}
 
-	__forceinline
+	__attribute__((always_inline))
 	unsigned int
 	Version(
-		__inout int* major = nullptr,
-		__inout int* minor = nullptr
+		out int* major = nullptr,
+		out int* minor = nullptr
 		)
 	{
 		return cs_version(major, minor);
 	}
 
-	__forceinline
+	__attribute__((always_inline))
 	static
-	const char* 
+	const char*
 	ErrToStr(
-		__in cs_err err
+		 cs_err err
 		)
 	{
 		return cs_strerror(err);
 	}
-	
+
 //////////////////////////////////////////////////////////////////////////
 // cs capstone engine settings
 //////////////////////////////////////////////////////////////////////////
-	
+
 	/*
 		cs_opt_value::CS_OPT_SYNTAX_DEFAULT = 0, // Default asm syntax (CS_OPT_SYNTAX).
 		cs_opt_value::CS_OPT_SYNTAX_INTEL, // X86 Intel asm syntax - default on X86 (CS_OPT_SYNTAX).
 		cs_opt_value::CS_OPT_SYNTAX_ATT,   // X86 ATT asm syntax (CS_OPT_SYNTAX).
 		cs_opt_value::CS_OPT_SYNTAX_NOREGNAME, // Prints register name with only number (CS_OPT_SYNTAX)
-		
+
 		http://capstone-engine.org/lang_c.html
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetSyntax(
-		__in cs_opt_value syntax
+		 cs_opt_value syntax
 		)
 	{
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_SYNTAX, syntax);
@@ -89,18 +89,18 @@ public:
 		cs_opt_value::CS_OPT_OFF //by default
 		cs_opt_value::CS_OPT_ON
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetDetail(
-		__in cs_opt_value detailedInfo
+		 cs_opt_value detailedInfo
 		)
 	{
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_DETAIL, detailedInfo);
 	}
 
 	/*
-		change mode at runtime : 
+		change mode at runtime :
 
 		cs_mode::CS_MODE_LITTLE_ENDIAN = 0,	// little endian mode (default mode)
 		cs_mode::CS_MODE_ARM = 0,	// 32-bit ARM
@@ -115,18 +115,18 @@ public:
 
 		http://capstone-engine.org/lang_c.html
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetMode(
-		__in cs_mode mode
+		 cs_mode mode
 		)
 	{
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_MODE, mode);
 	}
 
 	/*
-		possibility to redefining of mem mgr functions : 
+		possibility to redefining of mem mgr functions :
 
 		void *malloc(size_t size);
 		void *calloc(size_t nmemb, size_t size);
@@ -136,16 +136,16 @@ public:
 
 		http://capstone-engine.org/embed.html
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetMemMgrFunc(
-		__in cs_opt_mem& memMgrSetup
+		 cs_opt_mem& memMgrSetup
 		)
 	{
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_MEM, reinterpret_cast<size_t>(&memMgrSetup));
 	}
-	
+
 	/*
 		what to do when hitting *broken* instruction
 
@@ -154,11 +154,11 @@ public:
 
 		http://capstone-engine.org/skipdata.html
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetSkipData(
-		__in cs_opt_value skipData
+		 cs_opt_value skipData
 		)
 	{
 		return !cs_option(*m_csh.get(), cs_opt_type::CS_OPT_SKIPDATA, skipData);
@@ -174,11 +174,11 @@ public:
 		-> example : https://github.com/aquynh/capstone/blob/next/tests/test_skipdata.c
 		http://capstone-engine.org/skipdata.html
 	*/
-	__forceinline
+	__attribute__((always_inline))
 	__checkReturn
 	bool
 	SetSkipDataCallback(
-		__in cs_opt_skipdata& dataCallbackSetup
+		 cs_opt_skipdata& dataCallbackSetup
 		)
 	{
 		if (!SetSkipData(CS_OPT_ON))

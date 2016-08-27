@@ -10,7 +10,7 @@ class CSparcV9Disasm :
 {
 public:
 	CSparcV9Disasm(
-		__in unsigned int mode = cs_mode::CS_MODE_V9 + cs_mode::CS_MODE_BIG_ENDIAN
+		 unsigned int mode = cs_mode::CS_MODE_V9 + cs_mode::CS_MODE_BIG_ENDIAN
 		) : CCsDisasm(cs_arch::CS_ARCH_SPARC, mode)
 	{
 	}
@@ -21,7 +21,7 @@ class CSparcDisasm :
 {
 public:
 	CSparcDisasm(
-		__in unsigned int mode = cs_mode::CS_MODE_BIG_ENDIAN
+		 unsigned int mode = cs_mode::CS_MODE_BIG_ENDIAN
 		) : CCsDisasm(cs_arch::CS_ARCH_SPARC, mode)
 	{
 	}

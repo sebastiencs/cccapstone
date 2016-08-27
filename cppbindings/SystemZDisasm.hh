@@ -10,7 +10,7 @@ class CSystemZCDisasm :
 {
 public:
 	CSystemZCDisasm(
-		__in cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN
+		 cs_mode mode = cs_mode::CS_MODE_BIG_ENDIAN
 		) : CCsDisasm(cs_arch::CS_ARCH_SYSZ, mode)
 	{
 	}
